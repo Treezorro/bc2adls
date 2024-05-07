@@ -4,7 +4,7 @@ table 82560 "ADLSE Setup"
 {
     Access = Internal;
     DataClassification = CustomerContent;
-    DataPerCompany = false;
+    DataPerCompany = true;
     DataCaptionFields = Container;
 
     fields
@@ -111,6 +111,10 @@ table 82560 "ADLSE Setup"
         field(31; Lakehouse; Text[100])
         {
             Caption = 'Lakehouse';
+        }
+        field(32; FolderPath; Text[100])
+        {
+            Caption = '/FolderPath/EndFolder';
         }
         field(35; "Schema Exported On"; DateTime)
         {

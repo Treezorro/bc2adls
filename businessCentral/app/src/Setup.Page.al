@@ -66,6 +66,10 @@ page 82560 "ADLSE Setup"
                     {
                         Tooltip = 'Specifies the name of the Lakehouse where the data is going to be uploaded. This can be a name or a GUID.';
                     }
+                    field(FolderPath; Rec.FolderPath)
+                    {
+                        Tooltip = 'Optional: Specifies the folderpath of the files section Lakehouse where the data is going to be uploaded. This can be blank. If not blank it should start with /';
+                    }
                 }
                 group(Access)
                 {

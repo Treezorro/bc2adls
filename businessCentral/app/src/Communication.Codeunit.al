@@ -31,7 +31,7 @@ codeunit 82562 "ADLSE Communication"
         ExportOfSchemaNotPerformendTxt: Label 'Please export the schema first before trying to export the data.';
         EntitySchemaChangedErr: Label 'The schema of the table %1 has changed. %2', Comment = '%1 = Entity name, %2 = NotAllowedOnSimultaneousExportTxt';
         CdmSchemaChangedErr: Label 'There may have been a change in the tables to export. %1', Comment = '%1 = NotAllowedOnSimultaneousExportTxt';
-        MSFabricUrlTxt: Label 'https://onelake.dfs.fabric.microsoft.com/%1/%2.Lakehouse/Files', Locked = true, Comment = '%1: Workspace name, %2: Lakehouse Name';
+        MSFabricUrlTxt: Label 'https://onelake.dfs.fabric.microsoft.com/%1/%2.Lakehouse/Files%3', Locked = true, Comment = '%1: Workspace name, %2: Lakehouse Name, %3: /FolderPath/EndFolder';
         ResetTableExportTxt: Label '/reset/%1.txt', Locked = true, comment = '%1 = Table name';
 
     procedure SetupBlobStorage()
@@ -58,7 +58,7 @@ codeunit 82562 "ADLSE Communication"
                     exit(StrSubstNo(ContainerUrlTxt, ADLSESetup."Account Name", DefaultContainerName));
                 end;
             ADLSESetup."Storage Type"::"Microsoft Fabric":
-                exit(StrSubstNo(MSFabricUrlTxt, ADLSESetup.Workspace, ADLSESetup.Lakehouse));
+                exit(StrSubstNo(MSFabricUrlTxt, ADLSESetup.Workspace, ADLSESetup.Lakehouse, ADLSESetup.FolderPath));
 
         end;
     end;
