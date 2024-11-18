@@ -1,11 +1,11 @@
-page 82571 "ADLSE Table Last Timestamp"
+page 82576 "ADLSE Table Last Timestamp"
 {
     ApplicationArea = All;
     Caption = 'ADLSE Table Last Timestamp';
     PageType = List;
     SourceTable = "ADLSE Table Last Timestamp";
     UsageCategory = Administration;
-    
+
     layout
     {
         area(content)
