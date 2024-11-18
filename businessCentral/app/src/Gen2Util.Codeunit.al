@@ -24,7 +24,7 @@ codeunit 82568 "ADLSE Gen 2 Util"
         CouldNotCreateBlobErr: Label 'Could not create blob %1. %2', Comment = '%1: blob path, %2: error text';
         CouldNotReadDataInBlobErr: Label 'Could not read data on %1. %2', Comment = '%1: blob path, %2: Http respomse';
         CouldNotReadResponseHeaderErr: Label 'Could not read %1 from %2.', Comment = '%1: content header value , %2: blob path';
-        LatestBlockTagTok: Label '<Latest>%1</Latest>', Comment = '%1: block ID';
+        LatestBlockTagTok: Label '<Latest>%1</Latest>', Comment = '%1: block ID', Locked = true;
 
     procedure ContainerExists(ContainerPath: Text; ADLSECredentials: Codeunit "ADLSE Credentials"): Boolean
     var
@@ -89,7 +89,7 @@ codeunit 82568 "ADLSE Gen 2 Util"
         ContentLengthTok: Label 'Content-Length', Locked = true;
     begin
         OnBeforeGetBlobContentLength(BlobPath, ContentLength, IsHandled);
-        If IsHandled then
+        if IsHandled then
             exit;
 
         ADLSEHttp.SetMethod("ADLSE Http Method"::Head);
@@ -294,6 +294,26 @@ codeunit 82568 "ADLSE Gen 2 Util"
             exit(false);
 
         exit(true);
+    end;
+
+    procedure RemoveDeltasFromDataLake(ADLSEntityName: Text; ADLSECredentials: Codeunit "ADLSE Credentials")
+    var
+        ADLSESetup: Record "ADLSE Setup";
+        ADLSEHttp: Codeunit "ADLSE Http";
+        Response: Text;
+        Url: Text;
+        ADLSEContainerUrlTxt: Label 'https://%1.dfs.core.windows.net/%2', Comment = '%1: Account name, %2: Container Name', Locked = true;
+    begin
+        // DELETE https://{accountName}.{dnsSuffix}/{filesystem}/{path}
+        // https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/delete?view=rest-storageservices-datalakestoragegen2-2019-12-12
+        ADLSESetup.GetSingleton();
+        Url := StrSubstNo(ADLSEContainerUrlTxt, ADLSESetup."Account Name", ADLSESetup.Container);
+        Url += '/deltas/' + ADLSEntityName + '?recursive=true';
+
+        ADLSEHttp.SetMethod("ADLSE Http Method"::Delete);
+        ADLSEHttp.SetUrl(Url);
+        ADLSEHttp.SetAuthorizationCredentials(ADLSECredentials);
+        ADLSEHttp.InvokeRestApi(Response)
     end;
 
     [IntegrationEvent(false, false)]

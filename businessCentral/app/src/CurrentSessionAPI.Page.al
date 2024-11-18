@@ -1,20 +1,18 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
-page 82566 "ADLSE Run API"
+page 82571 "ADLSE CurrentSession API"
 {
     PageType = API;
     APIPublisher = 'bc2adlsTeamMicrosoft';
     APIGroup = 'bc2adls';
-    APIVersion = 'v1.0', 'v1.1';
-    EntityName = 'adlseRun';
-    EntitySetName = 'adlseRun';
-    SourceTable = "ADLSE Run";
+    APIVersion = 'v1.1', 'v1.2';
+    EntityName = 'adlseCurrentSession';
+    EntitySetName = 'adlseCurrentSessions';
+    SourceTable = "ADLSE Current Session";
     InsertAllowed = false;
     DeleteAllowed = false;
     ModifyAllowed = false;
     ODataKeyFields = SystemId;
-    ObsoleteState = Pending;
-    ObsoleteReason = 'This API is obsolete. Use the API v1.2 instead.';
 
     layout
     {
@@ -22,14 +20,11 @@ page 82566 "ADLSE Run API"
         {
             repeater(GroupName)
             {
-                field(id; Rec.ID) { }
                 field(tableId; Rec."Table ID") { }
+                field(sessionId; Rec."Session ID") { }
                 field(companyName; Rec."Company Name") { }
-                field(state; Rec.State) { }
-                field("error"; Rec.Error) { }
-                field(started; Rec.Started) { }
-                field(ended; Rec.Ended) { }
-                field(systemId; Rec.SystemId)
+                field(sessionUniqueId; Rec."Session Unique ID") { }
+                field(id; Rec.SystemId)
                 {
                     Editable = false;
                 }
@@ -39,7 +34,6 @@ page 82566 "ADLSE Run API"
                     Editable = false;
                 }
 #pragma warning restore
-
                 field(lastModifiedDateTime; Rec.SystemModifiedAt)
                 {
                     Editable = false;

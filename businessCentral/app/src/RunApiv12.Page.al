@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
-page 82566 "ADLSE Run API"
+page 82574 "ADLSE Run API v12"
 {
     PageType = API;
     APIPublisher = 'bc2adlsTeamMicrosoft';
     APIGroup = 'bc2adls';
-    APIVersion = 'v1.0', 'v1.1';
+    APIVersion = 'v1.2';
     EntityName = 'adlseRun';
     EntitySetName = 'adlseRun';
     SourceTable = "ADLSE Run";
@@ -13,8 +13,6 @@ page 82566 "ADLSE Run API"
     DeleteAllowed = false;
     ModifyAllowed = false;
     ODataKeyFields = SystemId;
-    ObsoleteState = Pending;
-    ObsoleteReason = 'This API is obsolete. Use the API v1.2 instead.';
 
     layout
     {
@@ -22,14 +20,14 @@ page 82566 "ADLSE Run API"
         {
             repeater(GroupName)
             {
-                field(id; Rec.ID) { }
+                field(no; Rec.ID) { }
                 field(tableId; Rec."Table ID") { }
                 field(companyName; Rec."Company Name") { }
                 field(state; Rec.State) { }
                 field("error"; Rec.Error) { }
                 field(started; Rec.Started) { }
                 field(ended; Rec.Ended) { }
-                field(systemId; Rec.SystemId)
+                field(id; Rec.SystemId)
                 {
                     Editable = false;
                 }
