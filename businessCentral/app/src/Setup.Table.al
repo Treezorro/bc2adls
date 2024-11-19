@@ -124,7 +124,7 @@ table 82560 "ADLSE Setup"
                 ValidGuid: Guid;
             begin
                 if not Evaluate(ValidGuid, Rec.Workspace) then
-                    if (StrLen(Rec.Workspace) < 3) or (StrLen(Rec.Workspace) > 24)
+                    if (StrLen(Rec.Workspace) < 3) or (StrLen(Rec.Workspace) > 30)
                         or TextCharactersOtherThan(Rec.Workspace, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_')
                     then
                         Error(WorkspaceIncorrectFormatErr);
@@ -139,7 +139,7 @@ table 82560 "ADLSE Setup"
                 ValidGuid: Guid;
             begin
                 if not Evaluate(ValidGuid, Rec.Lakehouse) then
-                    if (StrLen(Rec.Lakehouse) < 3) or (StrLen(Rec.Lakehouse) > 24)
+                    if (StrLen(Rec.Lakehouse) < 3) or (StrLen(Rec.Lakehouse) > 30)
                         or TextCharactersOtherThan(Rec.Lakehouse, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_')
                     then
                         Error(LakehouseIncorrectFormatErr);
